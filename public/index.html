@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musiqi Dünyası</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" type="image/" href="image/logo2.png">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+        integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+
+
+    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <!-- header start -->
+    <header id="header">
+        <div class="logo">
+            <svg class="music-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 18V5l12-2v13"></path>
+                <circle cx="6" cy="18" r="3"></circle>
+                <circle cx="18" cy="16" r="3"></circle>
+            </svg>
+            <h1><a href="#">Musiqi Dünyası</a></h1>
+        </div>
+
+
+        <!-- navigation -->
+
+        <ul class="navbar">
+            <li><a href="#home" class="active">Ana Səhifə</a></li>
+            <li><a href="#songs">Mahnılar Siyahısı</a></li>
+        </ul>
+
+        <!-- navigation end -->
+
+        <!--! <div class="fa-solid fa-bars" id="menu-icon"></div> -->
+
+        <div id="floatingAlbumArt" class="floating-album-art" style="display: none;">
+            <img id="floatingAlbumImg" src="image/music3.jpg" alt="Albom">
+        </div>
+
+        <div class="fa-solid fa-bars" id="menu-icon"></div>
+    </header>
+    <!-- header end -->
+
+    <!--! home start -->
+    <section id="home" class="home-section">
+        <div class="hom-container">
+            <h1 class="home-title">Musiqi Dünyasına Xoş Gəldiniz</h1>
+            <p class="home-subtitle">Sevdiyiniz mahnıları tapın və dinləyin</p>
+
+
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Mahnı adı yazın..." class="search-input">
+                <button class="search-btn"><i class='bx bx-search'></i></button>
+            </div>
+
+            <div id="searchResults" class="search-results"></div>
+
+            <div class="features">
+                <div class="features-card">
+                    <div class="features-icon"><i class='bx bx-music'></i></div>
+                    <h3>Milyonlarla Mahnı</h3>
+                    <p>Hər janrdan mahnı tapın</p>
+                </div>
+
+                <div class="features-card">
+                    <div class="features-icon2"><i class='bx bx-play'></i></div>
+                    <h3>Anında Dinlə</h3>
+                    <p>Hər yerdə mahnı dinləyin</p>
+                </div>
+
+                <div class="features-card">
+                    <div class="features-icon2"><i class='bx bx-down-arrow-alt'></i></div>
+                    <h3>Yüklə</h3>
+                    <p>Oflayn dinləmə üçün yüklə</p>
+                </div>
+
+                <div class="features-card">
+                    <div class="features-icon3"><i class='bx bxs-heart'></i></div>
+                    <h3>Sevimli Mahnılar</h3>
+                    <p>Sevdiklərinizi saxlayın</p>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- !home end -->
+
+
+    <!-- Mahnılar siyahısı -->
+
+    <section id="songs" class="songs-section">
+        <div class="container">
+            <h2>Mahnılar Siyahısı</h2>
+
+            <!-- FİLTR DÜYMƏLƏRI -->
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Hamısı</button>
+                <button class="filter-btn" data-filter="azerbaijani">Azərbaycan</button>
+                <button class="filter-btn" data-filter="turkish">Türk</button>
+                <button class="filter-btn" data-filter="russian">Rus</button>
+                <button class="filter-btn" data-filter="foreign">Xarici</button>
+
+
+
+            </div>
+
+            <!-- 4 CART GALLERY -->
+            <div class="songs-grid">
+
+                <!-- CART 1: AZƏRBAYCANCA -->
+                <div class="song-card" data-category="azerbaijani">
+                    <img src="image/Azerbaijani music celebration banner.png" alt="">
+                </div>
+
+                <!-- CART 2: TÜRKÇƏ -->
+                <div class="song-card" data-category="turkish">
+                    <img src="image/Turkish music vibes in motion (1).png" alt="">
+
+                </div>
+
+
+                <!-- CART 4: RUSÇA -->
+                <div class="song-card" data-category="russian">
+                    <img src="image/russian-music.png" alt="">
+                </div>
+
+                <!-- CART 3: XARİCİ -->
+                <div class="song-card" data-category="foreign">
+                    <img src="image/foreign-music.png" alt="">
+                </div>
+
+
+            </div>
+        </div>
+
+    </section>
+
+    <!-- modal mahnı siyahısı -->
+
+    <div id="songsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Mahnılar</h3>
+                <button class="modal-close" id="modalCloseBtn">✕</button>
+            </div>
+
+            <div id="modalSongsList" class="modal-songs-list">
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!--! modal mahnı siyahısı end -->
+
+    <!--! Mahnılar siyahısı -->
+    <!-- footer-music -->
+    <footer id="playerFooter" class="player-Footer">
+        <div class="player-footer-container">
+
+            <div class="player-info">
+                <p id="playerTitle">Sənətçi</p>
+                <p id="playerArtist">Mahnı adı</p>
+            </div>
+
+
+
+            <div class="player-controls">
+                <!-- play/pause -->
+                <button id="playPauseBtn" class="player-btn">
+                    <i class='bx bx-play'></i>
+
+                    <!-- yukle -->
+                    <button id="downloadBtn" class="player-btn">
+                        <i class='bx bx-down-arrow-alt'></i>
+                    </button>
+
+                    <!-- sevimli -->
+                    <button id="favoriteBtn" class="player-btn">
+                        <i class='bx bxs-heart'></i>
+
+                        <!-- bağla -->
+                        <button id="closeBtn" class="player-btn">
+                           <i class='bx bx-chevron-down'></i>
+            </div>
+
+        </div>
+        <div class="progress-container">
+            <span id="currentTime">0:00</span>
+
+            <div class="progress-bar" id="progressBar">
+                <div class="progress" id="progress"></div>
+            </div>
+
+            <span id="duration">0:00</span>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
