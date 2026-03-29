@@ -43,7 +43,7 @@ menu.onclick = () => {
 // ======================
 let tracks = [];
 
-fetch("/api/songs")
+fetch("https://musiqi-d-nyas.onrender.com")
     .then(res => res.json())
     .then(data => {
         tracks = data;
