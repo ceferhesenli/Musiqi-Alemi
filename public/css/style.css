@@ -741,6 +741,19 @@ transition: all 0.5s ease;
   margin-top: 1rem;
 }
 
+.filter-buttons{
+  display:grid;
+ grid-template-columns: repeat(2,1fr);
+}
+
+.player-controls{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 15px;
+}
+.player-controls button{
+  padding: 10px;
+}
 }
 
 /* =======================
