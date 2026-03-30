@@ -25,6 +25,21 @@ const currentTimeEl = document.getElementById('currentTime');
 const durationEl = document.getElementById('duration');
 
 
+
+const nextBtn = document.getElementById('nextBtn');
+const prevBtn = document.getElementById('prevBtn');
+
+nextBtn.onclick = () => {
+    playNextTrack();
+};
+
+prevBtn.onclick = () => {
+    playPrevTrack();
+};
+
+
+
+
 // menu-list
 let menu = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
@@ -41,14 +56,19 @@ menu.onclick = () => {
 // ======================
 // MAHNILAR
 // ======================
+
+
+
 let tracks = [];
 
-fetch("https://musiqi-d-nyas.onrender.com")
+fetch("/api/songs")
     .then(res => res.json())
     .then(data => {
         tracks = data;
-        console.log("Mahnılar yükləndi:", tracks);
+        console.log("Mahnılar gəldi:", tracks);
     });
+
+
 
 let currentAudio = null;
 let currentTrack = null;
@@ -61,7 +81,11 @@ let isPlaying = false;
 function playTrack(track) {
     if (currentAudio) currentAudio.pause();
 
-    currentAudio = new Audio(track.file);
+  currentAudio = new Audio(track.file.startsWith('http') 
+    ? track.file 
+    : window.location.origin + track.file
+);
+    // currentAudio = new Audio(track.file);
     
     currentAudio.addEventListener('timeupdate', () => {
     const currentTime = currentAudio.currentTime;
@@ -104,15 +128,26 @@ function formatTime(time) {
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
 
+
+// ⏭️ NÖVBƏTİ MAHNİ
 function playNextTrack() {
     if (!currentTrack || tracks.length === 0) return;
 
     const currentIndex = tracks.findIndex(t => t.file === currentTrack.file);
-
-    const nextTrack = tracks[currentIndex + 1] || tracks[0];
-
+    const nextTrack = tracks[currentIndex + 1] || tracks[0]; // sonrakı yoxdursa birinci
     playTrack(nextTrack);
 }
+
+// ⏮️ ƏVVƏLKİ MAHNİ
+function playPrevTrack() {
+    if (!currentTrack || tracks.length === 0) return;
+
+    const currentIndex = tracks.findIndex(t => t.file === currentTrack.file);
+    const prevTrack = tracks[currentIndex - 1] || tracks[tracks.length - 1]; // əvvəlki yoxdursa sonuncu
+    playTrack(prevTrack);
+}
+
+
 
 let isDragging = false;
 
@@ -236,9 +271,6 @@ document.querySelectorAll('.song-card').forEach(card => {
     });
 });
 
-
-
-
 function openModal(category) {
     const categoryNames = {
         'azerbaijani': 'Azərbaycanca Mahnılar',
@@ -249,8 +281,10 @@ function openModal(category) {
 
     modalTitle.textContent = categoryNames[category] || 'Mahnılar';
 
+    // hər dəfə təmizlə
     modalSongsList.innerHTML = '';
 
+    // tracks-dən filter et
     const filteredTracks = tracks.filter(track => track.category === category);
 
     filteredTracks.forEach(track => {
@@ -265,6 +299,7 @@ function openModal(category) {
             <button class="modal-song-play-btn">▶️</button>
         `;
 
+        // play
         div.querySelector('button').addEventListener('click', () => {
             playTrack(track);
             songsModal.style.display = 'none';
@@ -274,8 +309,9 @@ function openModal(category) {
     });
 
     songsModal.style.display = 'flex';
-}
 
+    
+}
 
 
 
