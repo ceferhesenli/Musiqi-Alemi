@@ -348,3 +348,10 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 // ======================
 // MODAL BAĞLAMA
 // ======================
+modalCloseBtn.addEventListener('click', () => {
+    songsModal.style.display = 'none';
+});
+
+songsModal.addEventListener('click', (e) => {
+    if (e.target === songsModal) songsModal.style.display = 'none';
+});
