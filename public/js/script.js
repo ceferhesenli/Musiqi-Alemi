@@ -310,26 +310,57 @@ function openModal(category) {
     // tracks-dən filter et
     const filteredTracks = tracks.filter(track => track.category === category);
 
+    // filteredTracks.forEach(track => {
+    //     const div = document.createElement('div');
+    //     div.className = 'modal-song-item';
+
+    //     div.innerHTML = `
+    //         <div class="modal-song-info">
+    //             <p class="modal-song-name">${track.name}</p>
+    //             <p class="modal-song-artist">${track.artist}</p>
+    //         </div>
+    //         <button class="modal-song-play-btn">▶️</button>
+    //     `;
+
+
+
+    //     //! play
+        
+    //     div.querySelector('button').addEventListener('click', () => {
+    //         playTrack(track);
+    //         songsModal.style.display = 'none';
+    //     });
+
+    //     modalSongsList.appendChild(div);
+    // });
+
     filteredTracks.forEach(track => {
-        const div = document.createElement('div');
-        div.className = 'modal-song-item';
+    const div = document.createElement('div');
+    div.className = 'modal-song-item';
 
-        div.innerHTML = `
-            <div class="modal-song-info">
-                <p class="modal-song-name">${track.name}</p>
-                <p class="modal-song-artist">${track.artist}</p>
-            </div>
-            <button class="modal-song-play-btn">▶️</button>
-        `;
+    div.innerHTML = `
+        <div class="modal-song-info">
+            <p class="modal-song-name">${track.name}</p>
+            <p class="modal-song-artist">${track.artist}</p>
+        </div>
+        <button class="modal-song-play-btn">▶️</button>
+    `;
 
-        // play
-        div.querySelector('button').addEventListener('click', () => {
-            playTrack(track);
-            songsModal.style.display = 'none';
-        });
-
-        modalSongsList.appendChild(div);
+    // 🎵 Div-ə klik veririk (indi mahnının hər yerinə klik etmək olar)
+    div.addEventListener('click', () => {
+        playTrack(track);
+        songsModal.style.display = 'none';
     });
+
+    // 🎵 Button klikini ayrıca saxlayırıq
+    div.querySelector('button').addEventListener('click', (e) => {
+        e.stopPropagation(); // div klikini təkrar işə salmır
+        playTrack(track);
+        songsModal.style.display = 'none';
+    });
+
+    modalSongsList.appendChild(div);
+});
 
     songsModal.style.display = 'flex';
 
