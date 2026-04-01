@@ -29,6 +29,8 @@ const durationEl = document.getElementById('duration');
 const nextBtn = document.getElementById('nextBtn');
 const prevBtn = document.getElementById('prevBtn');
 
+
+
 nextBtn.onclick = () => {
     playNextTrack();
 };
@@ -71,6 +73,7 @@ fetch("/api/songs")
 
 
 
+
 let currentAudio = null;
 let currentTrack = null;
 let isPlaying = false;
@@ -79,6 +82,12 @@ let isPlaying = false;
 // PLAY TRACK FUNKSIYASI
 // ======================
 
+
+
+
+
+
+
 function playTrack(track) {
     if (currentAudio) currentAudio.pause();
 
@@ -86,6 +95,9 @@ function playTrack(track) {
     ? track.file 
     : window.location.origin + track.file
 );
+
+
+
     // currentAudio = new Audio(track.file);
     
     currentAudio.addEventListener('timeupdate', () => {
@@ -119,6 +131,12 @@ function playTrack(track) {
 
     updatePlayButton();
 }
+
+
+
+
+
+
 
 function formatTime(time) {
     if (isNaN(time)) return "0:00";
@@ -272,6 +290,10 @@ document.querySelectorAll('.song-card').forEach(card => {
     });
 });
 
+
+
+
+
 function openModal(category) {
     const categoryNames = {
         'azerbaijani': 'Azərbaycanca Mahnılar',
@@ -313,6 +335,10 @@ function openModal(category) {
 
     
 }
+
+
+
+
 
 
 
