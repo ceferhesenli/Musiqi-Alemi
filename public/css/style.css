@@ -30,13 +30,12 @@
 
 html{
     font-size: 62.5%;
-    /* overflow: hidden; */
 }
 
 
 
 section{
-    min-height: 100vh;
+    min-height: 80vh;
     padding: 10rem 8% 2rem;
 }
 
@@ -45,8 +44,11 @@ body {
   font-family: "Inter", sans-serif;
 background-color: rgba(25, 30, 50, 0.95);
   color: var(--foreground);
+
   line-height: 1.6;
 }
+
+
 
 h1,h2,h3,h4,h5,h6 {
   font-family: "Poppins", sans-serif;
@@ -58,10 +60,7 @@ html {
 
 } 
 
-/* section {
-  max-width: 100%;
-  padding: 10rem 8% 1rem;
-} */
+
 /* heade start */
 
 header {
@@ -156,7 +155,10 @@ li a:hover::before {
   text-shadow: 0 0 12px var(--primary);
 }
 
-/* heade end */
+
+
+
+/* header end */
 
 /*! home start */
 
@@ -665,6 +667,43 @@ transition: 0.8s ease;
 /*!Mahnılar siyahısı end */
 
 
+
+
+/* ALBOMLAR */
+
+.albums-section h2{
+  text-align: center;
+  font-size: 3rem;
+  color: var(--primary);
+}
+.albums-grid{
+display: flex;
+gap: 1rem;
+margin-top: 2rem;
+
+}
+.albums-card{
+  border: 2px transparent;
+  width: 50%;
+  border-radius: 100%;
+    cursor: pointer;
+  transition: 0.5s ease; 
+ overflow: hidden;
+}
+.albums-card:hover{
+  box-shadow: 0 0 18px var(--primary);
+}
+.albums-card img{
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  object-fit: cover;
+  transition: 0.5s ease;
+}
+.albums-card img:hover{
+  transform: scale(1.1);
+}
+/* !ALBOMLAR */
 
 
 /* !Responsive desig */

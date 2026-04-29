@@ -24,8 +24,6 @@ const progressBar = document.getElementById('progressBar');
 const currentTimeEl = document.getElementById('currentTime');
 const durationEl = document.getElementById('duration');
 
-
-
 const nextBtn = document.getElementById('nextBtn');
 const prevBtn = document.getElementById('prevBtn');
 
@@ -72,6 +70,7 @@ fetch("/api/songs")
     });
 
 
+    
 
 
 let currentAudio = null;
@@ -83,36 +82,30 @@ let isPlaying = false;
 // ======================
 
 
-
-
-
-
-
 function playTrack(track) {
     if (currentAudio) currentAudio.pause();
 
-  currentAudio = new Audio(track.file.startsWith('http') 
-    ? track.file 
-    : window.location.origin + track.file
-);
+    // Server-dən gələn link artıq hazırdır
+    const audioUrl = track.file;
 
-
-
-    // currentAudio = new Audio(track.file);
+    currentAudio = new Audio(audioUrl);
+    currentAudio.preload = "auto";
     
+    // ⚡ TƏZ OYNATMAQ ÜÇÜN
+    currentAudio.play().catch(err => console.log("Play xətası:", err));
+
     currentAudio.addEventListener('timeupdate', () => {
-    const currentTime = currentAudio.currentTime;
-    const duration = currentAudio.duration;
+        const currentTime = currentAudio.currentTime;
+        const duration = currentAudio.duration;
 
-    if (duration) {
-        const percent = (currentTime / duration) * 100;
-        progress.style.width = percent + '%';
+        if (duration) {
+            const percent = (currentTime / duration) * 100;
+            progress.style.width = percent + '%';
 
-        currentTimeEl.textContent = formatTime(currentTime);
-        durationEl.textContent = formatTime(duration);
-    }
-});
-    currentAudio.play();
+            currentTimeEl.textContent = formatTime(currentTime);
+            durationEl.textContent = formatTime(duration);
+        }
+    });
 
     currentTrack = track;
     isPlaying = true;
@@ -134,10 +127,6 @@ function playTrack(track) {
 
 
 
-
-
-
-
 function formatTime(time) {
     if (isNaN(time)) return "0:00";
 
@@ -146,6 +135,11 @@ function formatTime(time) {
 
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
+
+
+
+
+
 
 
 // ⏭️ NÖVBƏTİ MAHNİ
@@ -291,6 +285,12 @@ document.querySelectorAll('.song-card').forEach(card => {
 });
 
 
+// document.querySelectorAll('.albums-card').forEach(card => {
+//     card.addEventListener('click', () => {
+//         const category = card.getAttribute('data-category');
+//         openModal(category);
+//     });
+// });
 
 
 
@@ -310,29 +310,10 @@ function openModal(category) {
     // tracks-dən filter et
     const filteredTracks = tracks.filter(track => track.category === category);
 
-    // filteredTracks.forEach(track => {
-    //     const div = document.createElement('div');
-    //     div.className = 'modal-song-item';
+    
 
-    //     div.innerHTML = `
-    //         <div class="modal-song-info">
-    //             <p class="modal-song-name">${track.name}</p>
-    //             <p class="modal-song-artist">${track.artist}</p>
-    //         </div>
-    //         <button class="modal-song-play-btn">▶️</button>
-    //     `;
-
-
-
-    //     //! play
+//     //     //! play
         
-    //     div.querySelector('button').addEventListener('click', () => {
-    //         playTrack(track);
-    //         songsModal.style.display = 'none';
-    //     });
-
-    //     modalSongsList.appendChild(div);
-    // });
 
     filteredTracks.forEach(track => {
     const div = document.createElement('div');
@@ -366,11 +347,6 @@ function openModal(category) {
 
     
 }
-
-
-
-
-
 
 
 // / Mahnı siyahısı
@@ -412,3 +388,75 @@ modalCloseBtn.addEventListener('click', () => {
 songsModal.addEventListener('click', (e) => {
     if (e.target === songsModal) songsModal.style.display = 'none';
 });
+
+
+
+
+
+document.querySelectorAll('.albums-card').forEach(card => {
+    card.addEventListener('click', () => {
+
+        const artist = card.getAttribute('data-artist');
+
+        openArtist(artist);
+
+    });
+});
+
+
+
+
+let albums = [];
+
+fetch("/api/albums")
+    .then(res => res.json())
+    .then(data => {
+        albums = data;
+    });
+
+
+
+function openArtist(artist) {
+    const album = albums.find(a => a.artist === artist);
+
+    if (!album) return;
+
+    modalSongsList.innerHTML = "";
+
+    album.songs.forEach(track => {
+        const div = document.createElement("div");
+        div.className = "modal-song-item";
+
+        div.innerHTML = `
+             <div class="modal-song-info">
+            <p class="modal-song-name">${track.name}</p>
+            <p class="modal-song-artist">${track.artist}</p>
+        </div>
+        <button class="modal-song-play-btn">▶️</button>
+        `;
+
+        div.onclick = () => {
+            playTrack(track);
+            songsModal.style.display = "none";
+        };
+
+        modalSongsList.appendChild(div);
+    });
+
+    songsModal.style.display = "flex";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

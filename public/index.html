@@ -14,11 +14,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
-
-
-
-    <!-- <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> -->
-
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
@@ -41,6 +36,7 @@
         <ul class="navbar">
             <li><a href="#home" class="active">Ana Səhifə</a></li>
             <li><a href="#songs">Mahnılar Siyahısı</a></li>
+            <li><a href="#albums">Albomlar</a></li>
         </ul>
 
         <!-- navigation end -->
@@ -52,6 +48,10 @@
         </div>
 
         <div class="fa-solid fa-bars" id="menu-icon"></div>
+
+
+
+
     </header>
     <!-- header end -->
 
@@ -174,6 +174,60 @@
 
     <!--! modal mahnı siyahısı end -->
 
+
+
+
+    
+    <!-- ALBOMLAR -->
+   <section id="albums" class="albums-section">
+
+    <h2>Albomlar</h2>
+
+    <div class="albums-grid">
+
+
+        <!-- Xanım-müğənnilər -->
+        <div class="albums-card" data-artist="Amina Sirin">
+            <img src="image/amina-sirin.webp">
+           
+        </div>
+
+        <div class="albums-card" data-artist="Roya">
+            <img src="image/roya.webp">
+          
+        </div>
+
+        <div class="albums-card" data-artist="Natavan-Hebibi">
+            <img src="image/natavan-hebibi.webp">
+            
+        </div>
+
+
+
+        <!-- kişi müğənnilər -->
+        <div class="albums-card" data-artist="Zamiq-Huseynov">
+            <img src="image/zamiq-huseynov.webp">
+            
+        </div>
+           <div class="albums-card" data-artist="Çingiz-Mustafayev">
+            <img src="image/cingiz-mustafayev.webp">
+            
+        </div>
+           <div class="albums-card" data-artist="Azad-Sabanov">
+            <img src="image/azad-shabanov.webp">
+            
+        </div>
+            </div>
+        
+
+    </div>
+
+</section>
+    <!--! ALBOMLAR -->
+
+
+
+
     <!--! Mahnılar siyahısı -->
     <!-- footer-music -->
     <footer id="playerFooter" class="player-Footer">
@@ -188,12 +242,12 @@
 
             <div class="player-controls">
                 <!-- qabaga -->
-                  <button id="prevBtn" class="player-btn">⏮️</button>
+                <button id="prevBtn" class="player-btn">⏮️</button>
                 <!-- play/pause -->
                 <button id="playPauseBtn" class="player-btn">
                     <i class='bx bx-play'></i>
-<!-- arxaya -->
-     <button id="nextBtn" class="player-btn">⏭️ </button>
+                    <!-- arxaya -->
+                    <button id="nextBtn" class="player-btn">⏭️ </button>
 
                     <!-- yukle -->
                     <button id="downloadBtn" class="player-btn">
@@ -206,7 +260,7 @@
 
                         <!-- bağla -->
                         <button id="closeBtn" class="player-btn">
-                           <i class='bx bx-chevron-down'></i>
+                            <i class='bx bx-chevron-down'></i>
             </div>
 
         </div>
@@ -222,6 +276,7 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script src="js/auth.js"></script>
 </body>
 
 </html>
